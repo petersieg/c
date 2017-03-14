@@ -14,9 +14,9 @@ small games - 4, ttt (tic-tac-toe) , mm (mastermind), othello
 
 ioccc.tgz - ioccc programs compiled in linux mint 18 64-bit. Most need xorg-dev. Read hints!:
 
-banks - X11 flight
+banks - X11 flight simulator
 
-cable3 - PC emulator; needs libsdl-dev; locate hd.img and emjoy
+cable3 - PC emulator; needs libsdl-dev; locate hd.img and enjoy
 
 birken - digital cuircuit simulator
 
