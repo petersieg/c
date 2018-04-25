@@ -6,5 +6,5 @@ http://lisp.plasticki.com/
 
 http://www.jonathanfischer.net/modern-common-lisp-on-windows/
 
-http://home.agh.edu.pl/~ligeza/wiki/lisp:quickstart
+https://common-lisp.net/~dlw/LispSurvey.html
 
