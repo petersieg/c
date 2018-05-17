@@ -1,0 +1,7 @@
+1 rem prim1
+10 z=1
+20 if z>1000 then end
+30 for i=3 to sqr(z) step 2
+40 if z/i=int(z/i) then 60
+50 next i:print z,",";
+60 z=z+2:goto 20
