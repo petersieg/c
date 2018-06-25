@@ -32,4 +32,4 @@ vtl- very tiny language
 
 acidwarp.tgz - Linux SDL port of famous DOS eye candy program
 
-salto-0.4.2.tar.gz + games.dsk.Z + *.pdf - Xerox Alto emulator for Linux + SDL
+wf - word search maze
