@@ -7,7 +7,7 @@
 	Linux-System required!
  
 	@author: www.c-howto.de
-    Enhanced to by a real snake game: peter.sieg2@gmx.de 03/2019
+    Enhanced to a real snake game by: peter.sieg2@gmx.de 03/2019
 */
 
 #include <stdbool.h>
@@ -83,9 +83,9 @@ int move(int key) {
 
 	setItem(pos.x, pos.y, TAIL);
 	switch(key) {
-		case KEY_MOVE_UP: pos.y--; break;
-		case KEY_MOVE_LEFT: pos.x--; break;
-		case KEY_MOVE_DOWN: pos.y++; break;
+		case KEY_MOVE_UP:    pos.y--; break;
+		case KEY_MOVE_LEFT:  pos.x--; break;
+		case KEY_MOVE_DOWN:  pos.y++; break;
 		case KEY_MOVE_RIGHT: pos.x++; break;
 	}
 
@@ -135,9 +135,9 @@ void printField() {
 			i = field[x][y];
 			switch(i) {
 			case BLANK: printf(" "); break;
-			case TAIL: printf("*"); break;
-			case HEAD: printf("O"); break;
-			case WALL: printf("#"); break;
+			case TAIL:  printf("*"); break;
+			case HEAD:  printf("O"); break;
+			case WALL:  printf("#"); break;
 			}
 		}
 	}
