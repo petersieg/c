@@ -1,0 +1,63 @@
+ 10 REM (C)2019 PETER SIEG
+ 20 PRINT "REVERSE AT POS UNTIL 1..9"                                           
+ 60 FOR I=1 TO 9                                                                
+ 70 @(I)=I                                                                      
+ 80 NEXT I                                                                      
+ 90 GOSUB 500                                                                   
+ 100 REM SHUFFLE ROW                                                            
+ 110 FOR I=1 TO 30                                                              
+ 120 P=RND(8)+1:REM RANDOM 2-9                                                  
+ 130 GOSUB 600                                                                  
+ 140 NEXT I                                                                     
+ 150 GOSUB 500                                                                  
+ 200 REM INPUT POS=P AND SHUFFLE AT P                                           
+ 210 INPUT "INPUT POSITION:",P                                                  
+ 220 IF P<2 THEN GOTO 210                                                       
+ 230 IF P>9 THEN GOTO 210                                                       
+ 240 GOSUB 600:REM SHUFFLE AT P                                                 
+ 250 GOSUB 500:REM PRINT ROW                                                    
+ 260 GOSUB 400:REM CHECK IF ROW IS CORRECT                                      
+ 270 REM IF CORRECT P=0                                                         
+ 280 IF P>0 THEN GOTO 200                                                       
+ 290 PRINT "CORRECT!"                                                           
+ 295 END                                                                        
+ 400 REM CHECK IF ROW IS CORRECT (1..9)                                         
+ 410 N=0                                                                        
+ 412 FOR I=1 TO 9                                                               
+ 414 IF @(I)=I THEN N=N+1                                                       
+ 416 NEXT I                                                                     
+ 418 IF N=9 THEN P=0                                                            
+ 420 RETURN                                                                     
+ 500 REM PRINT NUMBER ROW                                                       
+ 510 FOR I=1 TO 9                                                               
+ 520 PRINT @(I);                                                                
+ 530 NEXT I                                                                     
+ 540 PRINT                                                                      
+ 550 RETURN                                                                     
+ 600 REM SHUFFLE ROW AT POS P                                                   
+ 610 GOSUB 700                                                                  
+ 612 IF P>3 THEN GOSUB 720                                                      
+ 614 IF P>5 THEN GOSUB 730                                                      
+ 616 IF P>7 THEN GOSUB 740                                                      
+ 618 RETURN                                                                     
+ 700 REM EXCHANGE @(P) WITH @(1)                                                
+ 710 T=@(P)                                                                     
+ 712 @(P)=@(1)                                                                  
+ 714 @(1)=T                                                                     
+ 716 RETURN                                                                     
+ 720 REM EXCHANGE @(P-1) WITH @(2)                                              
+ 722 T=@(P-1)                                                                   
+ 724 @(P-1)=@(2)                                                                
+ 726 @(2)=T                                                                     
+ 728 RETURN                                                                     
+ 730 REM EXCHANGE @(P-2) WITH @(3)                                              
+ 732 T=@(P-2)                                                                   
+ 734 @(P-2)=@(3)                                                                
+ 736 @(3)=T                                                                     
+ 738 RETURN                                                                     
+ 740 REM ECHANGE @(P-3) WITH @(4)                                               
+ 742 T=@(P-3)                                                                   
+ 744 @(P-3)=@(4)                                                                
+ 746 @(4)=T                                                                     
+ 748 RETURN                                                                     
+
