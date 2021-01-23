@@ -1,0 +1,182 @@
+ AS V1.42 Beta [Bld 151] - Source File buzzword.asm - Page 1 - 1/6/2020 16:32:6
+
+
+       1/       0 :                     ; Programm
+       2/       0 :                     ;------------------------------------------------------------------------------
+       3/       0 :                     ; Start auf Adr. 1000 (Zusatz-ROM 3)
+       4/       0 :                     ;------------------------------------------------------------------------------
+       5/       0 :                     
+       6/       0 :                     		CPU Z80
+       7/       0 : =883H               DAK2		equ	0883h			; Anzeige 1x für 2x1 ROMs
+       8/       0 :                     ;DAK2		equ	0483h			; Anzeige 1x für 1x2 ROM 2716
+       9/       0 :                     ;DAK2		equ	0624h			; Anzeige 1x für MPF-1
+      10/       0 :                     
+      11/       0 :                     ;------------------------------------------------------------------------------
+      12/       0 :                     ;------------------------------------------------------------------------------
+      13/       0 :                     ;		org 	1000h			; LC80 U3 2716
+      14/    2000 :                     		org 	2000h			; MPF-1 U7 2716
+      15/    2000 : ED 5F               		ld	a,R			; read refresh register as seed
+      16/    2002 : 6F                  		ld	l,a			; in to reg a
+      17/    2003 : C2 08 20            		jp	nz,seed2		; if not zero continue
+      18/    2006 : 2E 03                 		ld 	l,3                   	; else set to 3
+      19/    2008 : E5                  seed2:		push	hl			; seed on stack
+      20/    2009 :                     main:
+      21/    2009 :                     ;------------------------------------------------------------------------------
+      22/    2009 :                     ; generate random index value
+      23/    2009 :                     ;------------------------------------------------------------------------------
+      24/    2009 :                     
+      25/    2009 : E1                  		pop	hl			; L = alte Zufallszahl
+      26/    200A :                     
+      27/    200A : 7D                  		LD 	A,L
+      28/    200B : E6 8E               		AND 	08EH			; RKM L
+      29/    200D : EA 11 20            		JP 	PE,S1
+      30/    2010 : 3F                  		CCF
+      31/    2011 : CB 15               S1:		RL 	L			; L = neue Zufallszahl
+      32/    2013 : E5                  		push	hl			; save on stack
+      33/    2014 :                     
+      34/    2014 :                     
+      35/    2014 : 7D                  		ld	a,l
+      36/    2015 : E6 0F               		and	a,15			; just 16 values 0-15
+      37/    2017 : 6F                  		ld	l,a
+      38/    2018 : 26 00               		ld	h,0
+      39/    201A :                     
+      40/    201A :                     ;------------------------------------------------------------------------------
+      41/    201A :                     ; multiply by 6 since our words array is fixed length on 6 bytes
+      42/    201A :                     ;------------------------------------------------------------------------------
+      43/    201A :                     
+      44/    201A : 29                    		add 	hl,hl                  	; HL = Index * 2
+      45/    201B : 54                    		ld 	d,h                    	; DE = Index * 2
+      46/    201C : 5D                    		ld 	e,l
+      47/    201D : 29                    		add 	hl,hl                   ; HL = Index * 4
+      48/    201E : 19                    		add 	hl,de                   ; HL = Index * 6
+      49/    201F :                     
+      50/    201F :                     ;------------------------------------------------------------------------------
+      51/    201F :                     ; now point to start of words array and add index value times 6 (element length)
+      52/    201F :                     ;------------------------------------------------------------------------------
+      53/    201F :                     
+      54/    201F : 11 43 20              		ld 	de,words0		; start of array address
+      55/    2022 : 19                    		add 	hl,de                   ; HL = ArrayAddress + Index * 6
+      56/    2023 :                     
+      57/    2023 :                     ;------------------------------------------------------------------------------
+      58/    2023 :                     ; just get hl into ix for subroutine dak2
+      59/    2023 :                     ;------------------------------------------------------------------------------
+      60/    2023 :                     
+ AS V1.42 Beta [Bld 151] - Source File buzzword.asm - Page 2 - 1/6/2020 16:32:6
+
+
+      61/    2023 : E5                  		push 	hl			; hl on stack
+      62/    2024 : DD E1                 		pop 	ix			; get hl as ix from stack
+      63/    2026 :                     		
+      64/    2026 : 2E 02               		ld	l,2
+      65/    2028 : 1E FA               w:		ld 	e,250			; delay value char
+      66/    202A : CD 83 08            w0:		call	dak2
+      67/    202D : CD 3B 20            		call 	delay1
+      68/    2030 : 1D                          	dec 	e
+      69/    2031 : C2 2A 20                    	jp 	nz,w0	    		; times e
+      70/    2034 : 2D                  		dec 	l
+      71/    2035 : C2 28 20            		jp	nz,w			; times l
+      72/    2038 : C3 09 20            		jp	main
+      73/    203B :                     
+      74/    203B :                     
+      75/    203B :                     ;------------------------------------------------------------------------------
+      76/    203B :                     ; simple delay routine of 256 nop's
+      77/    203B :                     ;------------------------------------------------------------------------------
+      78/    203B :                     
+      79/    203B : 3E 00               delay1: 	ld a,0				; 256 x NOP; A is destroyed
+      80/    203D : 00                  del11:  	nop
+      81/    203E : 3C                          	inc a
+      82/    203F : C2 3D 20                    	jp nz,del11
+      83/    2042 : C9                  del12:  	ret
+      84/    2043 :                     
+      85/    2043 :                     ;------------------------------------------------------------------------------
+      86/    2043 :                     ; our array of words in LC80 / MPF-1 7-segment byte values
+      87/    2043 :                     ;------------------------------------------------------------------------------
+      88/    2043 :                     		
+      89/    2043 :                     words0:
+      90/    2043 :                     ; LC-80
+      91/    2043 : AB E6 48 CE 68 CE   		db 0abh,0e6h,048h,0ceh,068h,0ceh ;"ENERGY"
+      92/    2049 : CA CE 68 6F C2 4F   		db 0cah,0ceh,068h,06fh,0c2h,04fh ;"PLANET"
+      93/    204F : 00 00 00 CE EA CD   		db 000h,000h,000h,0ceh,0eah,0cdh ;"2BE   "
+      94/    2055 : 00 00 00 E8 E9 CD   		db 000h,000h,000h,0e8h,0e9h,0cdh ;"2DO   "
+      95/    205B : 00 00 CE 20 E9 CD   		db 000h,000h,0ceh,020h,0e9h,0cdh ;"2DIE  "
+      96/    2061 : 00 00 C2 C2 6F 2B   		db 000h,000h,0c2h,0c2h,06fh,02bh ;"4ALL  "
+      97/    2067 : 00 6B CA 48 6F CE   		db 000h,06bh,0cah,048h,06fh,0ceh ;"EARTH "
+      98/    206D : 00 00 CE 4F E8 6B   		db 000h,000h,0ceh,04fh,0e8h,06bh ;"HOPE  "
+      99/    2073 : 00 00 CE E0 E8 C2   		db 000h,000h,0ceh,0e0h,0e8h,0c2h ;"LOVE  "
+     100/    2079 : 00 CE C6 6F CE 4F   		db 000h,0ceh,0c6h,06fh,0ceh,04fh ;"PEACE "
+     101/    207F : E9 68 CE 20 48 4E   		db 0e9h,068h,0ceh,020h,048h,04eh ;"FRIEND"
+     102/    2085 : 00 00 00 E9 E8 E6   		db 000h,000h,000h,0e9h,0e8h,0e6h ;"GOD   "
+     103/    208B : 00 00 00 68 E3 AE   		db 000h,000h,000h,068h,0e3h,0aeh ;"SUN   "
+     104/    2091 : 00 CA 20 00 E8 E9   		db 000h,0cah,020h,000h,0e8h,0e9h ;"DO IT "
+     105/    2097 : 6B CA E0 48 6B CA   		db 06bh,0cah,0e0h,048h,06bh,0cah ;"THRUTH"
+     106/    209D : 00 00 C2 C2 CE C6   		db 000h,000h,0c2h,0c2h,0ceh,0c6h ;"CELL  "
+     107/    20A3 :                     
+     108/    20A3 :                     ; MPF-1
+     109/    20A3 :                     ;		db 0b6h,0adh,003h,08fh,023h,09fh ;"ENERGY"
+     110/    20A3 :                     ;		db 087h,08fh,023h,03fh,085h,01fh ;"PLANET"
+     111/    20A3 :                     ;		db 000h,000h,000h,08fh,0a7h,09bh ;"2BE   "
+     112/    20A3 :                     ;		db 000h,000h,000h,0a3h,0b3h,09bh ;"2DO   "
+     113/    20A3 :                     ;		db 000h,000h,08fh,089h,0b3h,09bh ;"2DIE  "
+     114/    20A3 :                     ;		db 000h,000h,085h,085h,03fh,036h ;"4ALL  "
+     115/    20A3 :                     ;		db 000h,037h,087h,003h,03fh,08fh ;"EARTH "
+     116/    20A3 :                     ;		db 000h,000h,08fh,01fh,0a3h,037h ;"HOPE  "
+     117/    20A3 :                     ;		db 000h,000h,08fh,0b7h,0a3h,085h ;"LOVE  "
+     118/    20A3 :                     ;		db 000h,08fh,08dh,03fh,08fh,01fh ;"PEACE "
+     119/    20A3 :                     ;		db 0b3h,023h,08fh,089h,003h,00fh ;"FRIEND"
+     120/    20A3 :                     ;		db 000h,000h,000h,0b3h,0a3h,0adh ;"GOD   "
+ AS V1.42 Beta [Bld 151] - Source File buzzword.asm - Page 3 - 1/6/2020 16:32:6
+
+
+     121/    20A3 :                     ;		db 000h,000h,000h,023h,0b5h,0aeh ;"SUN   "
+     122/    20A3 :                     ;		db 000h,087h,089h,000h,0a3h,0b3h ;"DO IT "
+     123/    20A3 :                     ;		db 037h,087h,0b5h,003h,037h,087h ;"THRUTH"
+     124/    20A3 :                     ;		db 000h,000h,085h,085h,08fh,08dh ;"CELL  "
+     125/    20A3 :                     
+     126/    20A3 :                     ;------------------------------------------------------------------------------
+     127/    20A3 :                     
+     128/    20A3 :                     		end
+ AS V1.42 Beta [Bld 151] - Source File buzzword.asm - Page 4 - 1/6/2020 16:32:6
+
+
+  Symbol Table (* = unused):
+  --------------------------
+
+*ARCHITECTURE :  i386-unknown-win32 - | *BIGENDIAN :                      0 - |
+*BRANCHEXT :                      0 - | *CASESENSITIVE :                  0 - |
+*CONSTPI :        3.141592653589793 - |  DAK2 :                         883 - |
+*DATE :                    1/6/2020 - |  DEL11 :                       203D C |
+*DEL12 :                       2042 C |  DELAY1 :                      203B C |
+*FALSE :                          0 - | *FULLPMMU :                       1 - |
+*HAS64 :                          1 - | *HASDSP :                         0 - |
+*HASFPU :                         0 - | *HASPMMU :                        0 - |
+*INEXTMODE :                      0 - | *INLWORDMODE :                    0 - |
+*INMAXMODE :                      0 - | *INSRCMODE :                      0 - |
+*INSUPMODE :                      0 - | *LISTON :                         1 - |
+*MACEXP :                         7 - |  MAIN :                        2009 C |
+*MOMCPU :                        80 - | *MOMCPUNAME :                   Z80 - |
+*NESTMAX :                      100 - | *PACKING :                        0 - |
+*PADDING :                        1 - | *RELAXED :                        0 - |
+ S1 :                          2011 C |  SEED2 :                       2008 C |
+*TIME :                     16:32:6 - | *TRUE :                           1 - |
+*VERSION :                     142F - |  W :                           2028 C |
+ W0 :                          202A C |  WORDS0 :                      2043 C |
+
+     38 Symbols
+     29 unused symbols
+
+ AS V1.42 Beta [Bld 151] - Source File buzzword.asm - Page 5 - 1/6/2020 16:32:6
+
+
+  Code Pages:
+  ----------
+
+STANDARD (0 changed characters)
+
+1 code page
+
+0.03 seconds assembly time
+
+    129 lines source file
+      2 passes
+      0 errors
+      0 warnings
