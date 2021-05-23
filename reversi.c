@@ -1,3 +1,5 @@
+// https://pc3.5ch.net/test/read.cgi/tech/984182993/337
+// https://dev.to/iigura/reversiothello-game-program-which-you-can-choose-the-first-or-the-second-in-7-lines-code-of-c-3799
 int printf(const char*,...);
 int scanf(const char*,...);
 
