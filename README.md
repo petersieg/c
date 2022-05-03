@@ -28,6 +28,12 @@ monge - X11 formula imager; see mandelbrot fractal
 
 vtl- very tiny language
 
+hague - transform text into morse code
+
+karns - find way in labyrinth and show it
+
+ioccc-mills.tgz - run old unix systems
+
 # misc
 
 acidwarp.tgz - Linux SDL port of famous DOS eye candy program
