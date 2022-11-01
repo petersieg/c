@@ -1,0 +1,28 @@
+DBLICK-V  In this nicely done version of the venerable video game BREAKOUT
+--------  you will attempt, through prodigious paddle use, to keep the ball
+          in play and break all the bricks in a multi-layered wall.  Points
+          are scored for each brick broken, with the bricks deeper in the wall
+          being worth more points than the ones on the surface.
+
+          Move the paddle left with the "," key and right with the "." key.
+
+          At the beginning of each game you will set the skill level from
+          1 (slow motion) to 9 (fast forward).  You then select whether or not
+          you would like an occasional random jog in the motion of the ball.
+          Finally, answer the prompt, "Do you want a paddle with a spacebar
+          stop?", with a "Y" or an "N".  If you answer "N" the paddle will
+          respond slowly, but will keep moving only as long as the "," or
+          "." key is pressed.  When the key is released, the paddle stops.
+          This is the best mode to learn in.  When you've become a pro, answer
+          "Y".  Now the paddle will move immediately when "," or "." is pressed
+          and will keep moving until the spacebar is pressed.
+
+          Be prepared!  As soon as the final prompt is answered, the game will
+          begin.
+
+          Of special interest to programmers is the TypeKaypro function.  This
+          function examines a port ( 1E ) to determine which type of Kaypro it
+          is running on.  TypeKaypro will allow you to write programs which,
+          like DBLICK-V, will run on both 83 and 84 model Kaypros.
+
+
