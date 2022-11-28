@@ -1,4 +1,5 @@
-program art1;
+(* ANSI ESC Simple Demo Effect - (C) P. Sieg 2022 CC-BY-NC-SA *)
+program art4;
 
 var
   c,i,j : integer;

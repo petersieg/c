@@ -1,3 +1,4 @@
+(* ANSI ESC Simple Demo Effect - (C) P. Sieg 2022 CC-BY-NC-SA *)
 program art1;
 
 var
