@@ -1,0 +1,36 @@
+
+(********************************************************************)
+(*                                                                  *)
+(*  collatz.sd7   compute collatz numbers                           *)
+(*  Copyright (C) 2023  P. Sieg CC-BY-SA                            *)
+(*                                                                  *)
+(********************************************************************)
+
+
+$ include "seed7_05.s7i";
+  include "stdio.s7i";
+
+const proc: main is func
+  local
+    var integer: n is 0;
+    var integer: r is 0;
+    var integer: c is 0;
+  begin
+  
+  write("Input Integer: ");
+  readln(n);
+  if (n < 1) then n := 1; 
+  end if;
+  
+  repeat
+    r := n mod 2;
+    if (r <> 1) then n := n div 2;
+    else n := 3 * n + 1;
+    end if;
+    c := c + 1;
+    write  ("c=");
+    write  (c);
+    write  (" n=");
+    writeln(n);
+  until (n = 1);
+end func;
