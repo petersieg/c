@@ -1,0 +1,36 @@
+
+(********************************************************************)
+(*                                                                  *)
+(*  fibonacci.sd7   compute fibonacci numbers                       *)
+(*  Copyright (C) 2023  P. Sieg CC-BY-SA                            *)
+(*                                                                  *)
+(********************************************************************)
+
+
+$ include "seed7_05.s7i";
+  include "stdio.s7i";
+
+const proc: main is func
+  local
+    var integer: n is 0; (* for loop var  *)
+    var integer: a is 0; 
+    var integer: b is 1;
+    var integer: r is 0; (* result of a+b *)
+    var integer: c is 0; (* count limit   *)
+  begin
+  
+  write("Input count: ");
+  readln(c);
+  if (c < 10) then c := 10; 
+  end if;
+  
+  for n range 1 to c do
+    r := a + b;
+    write  ("n=");
+    write  (n);
+    write  (" r=");
+    writeln(r);
+    a := b;
+    b := r;
+  end for;
+end func;
