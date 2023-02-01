@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+
+<body>
+
+  <p>Collartz sequence:</p>
+
+  <script>
+  
+    let n = 5;
+    let i = 0;
+    n = prompt('Bitte geben Sie eine Zahl ein!', n);
+    
+    document.write( i,'-',n, '<br>');
+    console.log   ( i,'-',n);
+    
+    while (n > 1) {
+      if ((n % 2) == 1) {
+        n = n * 3 + 1;
+      } else {
+        n = n / 2;
+      }
+      i = i + 1;
+      document.write( i,'-',n, '<br>');
+      console.log   ( i,'-',n);
+    }
+  </script>
+
+  <p>End.</p>
+
+</body>
+
+</html>

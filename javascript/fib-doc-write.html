@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+
+<body>
+
+  <p>Fibonacci sequence:</p>
+
+  <script>
+    let i = 0;
+    let a = 0;
+    let b = 1;
+    let c = 0;
+    while (c < 100) {
+      c = a + b;
+      i = i + 1;
+      document.write( i,'-',c, '<br>');
+      a = b;
+      b = c;
+    }
+  </script>
+
+  <p>End.</p>
+
+</body>
+
+</html>
