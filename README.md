@@ -10,6 +10,8 @@ pi* - Pi programs
 
 small games - 4, ttt (tic-tac-toe) , mm (mastermind), othello
 
+donut - Spinning 3d ascii art donut deobfuscated c code. Origin: https://www.a1k0n.net/2011/07/20/donut-math.html
+
 # ioccc
 
 ioccc.tgz - ioccc programs compiled in linux mint 18 64-bit. Most need xorg-dev. Read hints!:
