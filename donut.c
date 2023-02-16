@@ -1,3 +1,7 @@
+/*
+donut.c deobfuscated c source
+Origin: https://www.a1k0n.net/2011/07/20/donut-math.html
+*/
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
