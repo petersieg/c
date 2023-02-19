@@ -1,1 +1,1 @@
-: fib + dup dup . CR rot ;
+: fib dup rot + dup . CR ;
