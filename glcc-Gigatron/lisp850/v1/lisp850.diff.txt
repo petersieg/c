@@ -1,0 +1,64 @@
+6a7
+> #include <math.h>
+8,12c9,17
+< #define I unsigned
+< #define L double
+< #define T *(char*)&
+< #define A (char*)cell
+< #define N 1024
+---
+> typedef struct { double d; char t; } cell_t;
+> 
+> 
+> #define I     unsigned long
+> #define L     cell_t
+> #define D(x)  ((x).d)
+> #define T(x)  ((x).t)
+> #define A     (char*)cell
+> #define N     1024
+15,16c20,21
+< L box(I t,I i) { L x = i+10; T(x) = t; return x; }
+< I ord(L x) { T(x) &= 15; return (I)x-10; }
+---
+> L box(I t,I i) { L x; D(x) = i; T(x) = t; return x; }
+> I ord(L x) { T(x) &= 15; return (I)D(x); }
+18c23
+< I equ(L x,L y) { return x == y; }
+---
+> I equ(L x,L y) { return T(x) == T(y) && D(x) == D(y); }
+21c26
+<  if (i == hp && (hp += strlen(strcpy(A+i,s))+1) > sp<<3) abort();
+---
+>  if (i == hp && (hp += strlen(strcpy(A+i,s))+1) > sp*sizeof(L)) abort();
+24c29
+< L cons(L x,L y) { cell[--sp] = x; cell[--sp] = y; if (hp > sp<<3) abort(); return box(CONS,sp); }
+---
+> L cons(L x,L y) { cell[--sp] = x; cell[--sp] = y; if (hp > sp*sizeof(L)) abort(); return box(CONS,sp); }
+39,44c44,49
+< L f_add(L t,L e) { L n = car(t = evlis(t,e)); while (!not(t = cdr(t))) n += car(t); return num(n); }
+< L f_sub(L t,L e) { L n = car(t = evlis(t,e)); while (!not(t = cdr(t))) n -= car(t); return num(n); }
+< L f_mul(L t,L e) { L n = car(t = evlis(t,e)); while (!not(t = cdr(t))) n *= car(t); return num(n); }
+< L f_div(L t,L e) { L n = car(t = evlis(t,e)); while (!not(t = cdr(t))) n /= car(t); return num(n); }
+< L f_int(L t,L e) { L n = car(evlis(t,e)); return n-1e9 < 0 && n+1e9 > 0 ? (long)n : n; }
+< L f_lt(L t,L e) { return t = evlis(t,e),car(t) - car(cdr(t)) < 0 ? tru : nil; }
+---
+> L f_add(L t,L e) { L n = car(t = evlis(t,e)); while (!not(t = cdr(t))) D(n) += D(car(t)); return num(n); }
+> L f_sub(L t,L e) { L n = car(t = evlis(t,e)); while (!not(t = cdr(t))) D(n) -= D(car(t)); return num(n); }
+> L f_mul(L t,L e) { L n = car(t = evlis(t,e)); while (!not(t = cdr(t))) D(n) *= D(car(t)); return num(n); }
+> L f_div(L t,L e) { L n = car(t = evlis(t,e)); while (!not(t = cdr(t))) D(n) /= D(car(t)); return num(n); }
+> L f_int(L t,L e) { L n = car(evlis(t,e)); D(n)=floor(D(n)+0.5); return n; }
+> L f_lt(L t,L e) { return t = evlis(t,e),D(car(t)) - D(car(cdr(t))) < 0 ? tru : nil; }
+77,78c82,83
+<   L n; int i = strlen(buf);
+<   return isdigit(buf[*buf == '-']) && sscanf(buf,"%lg%n",&n,&i) && !buf[i] ? n : atom(buf);
+---
+>   L n; char *endptr; D(n) = strtod(buf, &endptr);
+>   return isdigit(buf[*buf == '-']) && !*endptr ? n : atom(buf);
+96c101
+<  else printf("%.10lg",x);
+---
+>  else printf("%.10g",D(x));
+104c109
+<  while (1) { printf("\n%u>",sp-hp/8); print(eval(read(),env)); gc(); }
+---
+>  while (1) { printf("\n%u>",(unsigned)(sp-hp/sizeof(L))); print(eval(read(),env)); gc(); }

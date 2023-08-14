@@ -1,0 +1,54 @@
+8,12c8,16
+< #define I unsigned
+< #define L double
+< #define T *(char*)&
+< #define A (char*)cell
+< #define N 1024
+---
+> typedef struct { double d; char t; } cell_t;
+> 
+> 
+> #define I      unsigned
+> #define L      long
+> #define T(x)   (I)(x>>24)
+> #define B(t,x) ((L)(x)&0xffffffL|(((L)(t))<<24))
+> #define A      (char*)cell
+> #define N      1024
+15,17c19,21
+< L box(I t,I i) { L x = i+10; T(x) = t; return x; }
+< I ord(L x) { T(x) &= 15; return (I)x-10; }
+< L num(L n) { T(n) &= 159; return n; }
+---
+> L box(I t,I i) { return B(t,i); }
+> I ord(L x) { return (I)x; }
+> L num(L n) { return ((n&0xfffffffL)^0x8000000L)-0x8000000L; }
+21c25
+<  if (i == hp && (hp += strlen(strcpy(A+i,s))+1) > sp<<3) abort();
+---
+>  if (i == hp && (hp += strlen(strcpy(A+i,s))+1) > sp*sizeof(L)) abort();
+24c28
+< L cons(L x,L y) { cell[--sp] = x; cell[--sp] = y; if (hp > sp<<3) abort(); return box(CONS,sp); }
+---
+> L cons(L x,L y) { cell[--sp] = x; cell[--sp] = y; if (hp > sp*sizeof(L)) abort(); return box(CONS,sp); }
+43c47
+< L f_int(L t,L e) { L n = car(evlis(t,e)); return n-1e9 < 0 && n+1e9 > 0 ? (long)n : n; }
+---
+> L f_int(L t,L e) { L n = car(evlis(t,e)); return n; }
+77,78c81,82
+<   L n; int i = strlen(buf);
+<   return isdigit(buf[*buf == '-']) && sscanf(buf,"%lg%n",&n,&i) && !buf[i] ? n : atom(buf);
+---
+>   char *endptr; L n = strtol(buf, &endptr, 0);
+>   return isdigit(buf[*buf == '-']) && !*endptr ? n : atom(buf);
+96c100
+<  else printf("%.10lg",x);
+---
+>  else printf("%ld",x);
+101c105
+<  printf("lisp850");
+---
+>  printf("lisp850-l");
+104c108
+<  while (1) { printf("\n%u>",sp-hp/8); print(eval(read(),env)); gc(); }
+---
+>  while (1) { printf("\n%u>",(unsigned)(sp-hp/sizeof(L))); print(eval(read(),env)); gc(); }
