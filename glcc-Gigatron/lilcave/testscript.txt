@@ -1,0 +1,15 @@
+get coin
+give coin to guard
+go cave
+get key
+go south
+open door
+go south
+unlock box
+open box
+examine box
+get gold from box
+inventory
+put gold in box
+examine box
+quit
