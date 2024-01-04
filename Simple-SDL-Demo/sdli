@@ -1,0 +1,1 @@
+m68k-atari-mint-gcc $1.c inprint.c -o $1.prg -L /usr/m68k-atari-mint/lib -lSDL -lgem
