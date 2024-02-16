@@ -1,0 +1,13 @@
+-rw-r--r--  1 ich  staff  3160  6 Jan 17:27 arecibo64.gt1 - original size
+-rw-r--r--  1 ich  staff  2283 10 Jan 19:41 arecibo64.gt1 - no use _console*
+-rw-r--r--  1 ich  staff  1884 10 Jan 19:46 arecibo64.gt1 - no rand > SYS_Random
+-rw-r--r--  1 ich  staff  1419 10 Jan 19:51 arecibo64.gt1z - compressed gt1z
+---
+-rw-r--r--  1 ich  staff  1601 11 Jan 14:16 arecibo64.gt1  - suggestions
+-rw-r--r--  1 ich  staff  1147 11 Jan 14:22 arecibo64.gt1z - compressed gt1z
+
+--- arecibo msg as bit array:
+-rw-r--r--  1 ich  staff  990 15 Feb 21:21 arecibo64.gt1 
+-rw-r--r--  1 ich  staff  987 15 Feb 21:25 arecibo64.gt1 - calc xpos just ones
+-rw-r--r--  1 ich  staff  768 15 Feb 21:34 arecibo64.gt1z - compressed gt1z
+-rw-r--r--  1 ich  staff  969 16 Feb 10:02 arecibo64.gt1 - for (xx=0;xx<150;xx+=25) - save second calculation
