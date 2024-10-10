@@ -1,5 +1,8 @@
 # PONG
 
+Author: flightcrank
+Source: https://github.com/flightcrank/pong
+
 This is a recreation of the classic pong video game. Implemented in the C
 programming language, using SDL library to display graphics on the screen.
 
