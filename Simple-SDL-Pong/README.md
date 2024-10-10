@@ -1,8 +1,12 @@
 # PONG
 
 Author: flightcrank
-Source: https://github.com/flightcrank/pong
 
+Source: https://github.com/flightcrank/pong
+'''
+Answer for which license the source is:
+They (pong/invaders/sdl demos) are unlicensed. They are simple applications and were used just to learn SDL. Feel free to use or modify the code in anyway you see fit.
+'''
 This is a recreation of the classic pong video game. Implemented in the C
 programming language, using SDL library to display graphics on the screen.
 
