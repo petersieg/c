@@ -8,7 +8,7 @@ An implementation of the classic [Tetris game](https://en.wikipedia.org/wiki/Tet
 
 ## Desktop preview
 
-![Preview](preview.jpeg)
+![Preview](Preview.png)
 
 ## Installation
 
