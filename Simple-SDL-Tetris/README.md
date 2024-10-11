@@ -1,37 +1,35 @@
 # SDL Tetris
 
+Source from: https://github.com/olzhasar/sdl-tetris
+
+I just took out any sdl_ttf (because of huge dependencies) requirements. Score is appended to file SCORE.TXT at end/quit of game.
+
 An implementation of the classic [Tetris game](https://en.wikipedia.org/wiki/Tetris) in the C programming language using the [SDL-2 library](https://www.libsdl.org/)
-
-## WebAssembly
-
-The game has been ported to WebAssembly using [Emscripten](https://emscripten.org/)
-
-Check out the [Live Demo](https://olzhasar.github.io/sdl-tetris/)
 
 ## Desktop preview
 
-![Preview](preview.gif)
+![Preview](preview.jpeg)
 
 ## Installation
 
 1. Clone this repository to your system:
 
 ```sh
-git clone https://github.com/olzhasar/sdl-tetris.git
+git clone https://github.com/olzhasar/Simple-SDL-Tetris.git
 ```
 
-2. [Install](https://wiki.libsdl.org/SDL2/Installation) SDL2 and SDL2_ttf on your machine
+2. [Install](https://wiki.libsdl.org/SDL2/Installation) SDL2 on your machine
 
 - On MacOS you can use Homebrew:
 
 ```sh
-brew install sdl2 sdl2_ttf
+brew install sdl2
 ```
 
 3. Compile and run the project code with make
 
 ```sh
-cd sdl-tetris
+cd Simple-SDL-Tetris
 make
 ```
 
