@@ -160,7 +160,7 @@ void render_game_over_message(int score) {
   strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
   snprintf(score_str, SCORE_SIZE, "%i", score);
   f = fopen("SCORE.TXT", "a");
-  fprintf(f, "%s YOU SCORED: %s\n", buffer, score_str);
+  fprintf(f, "%s %s %s YOU SCORED: %s\n", os, progname, buffer, score_str);
   fclose(f);
 }
 

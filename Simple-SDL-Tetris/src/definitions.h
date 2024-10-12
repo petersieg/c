@@ -14,4 +14,5 @@
 #define GRID_WIDTH 10
 #define GRID_HEIGHT 20
 static uint32_t score = 0;
+char progname[255];
 #endif
