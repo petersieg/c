@@ -1,1 +1,1 @@
-# some simple pascal programs
+# Some simple pascal programs
