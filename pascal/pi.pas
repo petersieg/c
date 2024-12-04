@@ -1,3 +1,11 @@
+(* From: https://rosettacode.org/wiki/Pi#Pascal *)
+(* Works with: Free_Pascal
+   With minor editing changes as published by Stanley Rabinowitz in [6]. 
+   Minor improvement of <user>Mischi</user> { speedup ~2 ( n=10000 , 
+   rumtime 4s-> 1,44s fpc 2.6.4 -O3 }, by calculating only necessary digits up to n. ) 
+   See: https://www.cs.ox.ac.uk/people/jeremy.gibbons/publications/spigot.pdf
+*)
+
 Program Pi_Spigot;
 const
   n   = 1000;
