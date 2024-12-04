@@ -1,3 +1,4 @@
+(* Formatted from: https://comp.os.cpm.narkive.com/5Pa24XZp/svs-pascal-mandelbrot-demo *)
 program mandel;
 var
 ca, cb, a, b, t: real;
