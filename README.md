@@ -14,6 +14,15 @@ donut - Spinning 3d ascii art donut deobfuscated c code. Origin: https://www.a1k
 
 # ioccc
 
+Some hints on deobfuscating:
+
+https://github.com/litonico/DeobfuscateEndoh
+
+https://medium.com/@LainIwakura/deobfuscating-obfuscated-code-for-fun-and-no-profit-36ec615c8f5d
+
+https://medium.com/@LainIwakura/deobfuscating-code-for-fun-and-no-profit-round-2-60d78b67ebce
+
+
 ioccc.tgz - ioccc programs compiled in linux mint 18 64-bit. Most need xorg-dev. Read hints!:
 
 banks - X11 flight simulator
