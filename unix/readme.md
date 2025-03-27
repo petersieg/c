@@ -2,7 +2,7 @@
 
 ### Simple ascii terminal games
 
-Just ao a:
+Just do a:
 
 cc -o tetris tetris.c
 
